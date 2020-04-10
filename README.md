@@ -1,7 +1,8 @@
 # Deltares-Climate-Change
 
-| ![Image](heatmap.png) |
-| :--: | 
+<p align="center">
+  <img width="300" height="300" src="heatmap.png">
+</p>
 
 Warning: Since the dataset Deltares provided us with is too big to just upload here, I recommend to just store the data locally in a separate folder or ignore the specific directory (see https://stackoverflow.com/questions/343646/ignoring-directories-in-git-repositories-on-windows) to prevent uploading the data whenever you push your local changes.
 
