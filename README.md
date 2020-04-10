@@ -18,3 +18,6 @@ Okay so here is a quick Git tutorial in case you are using the command line:
     git commit For commiting (i.e. writing into the database) everything that has been added to the staging area
 
     git push For uploading the committed stuff to the server
+    
+    git stash For a quick way of getting rid of all your local changes (but still being able to get them back later). Use this in case you want to have exactly the files which are online, but are not able to pull for some reason. Git stash will put all your local changes aside, which will help you pulling the available files. Note that this will get rid of your uncommitted changes, but in case you want them back there is a way to recover them (see https://www.git-scm.com/docs/git-stash)
+
