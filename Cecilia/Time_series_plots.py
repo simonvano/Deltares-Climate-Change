@@ -5,12 +5,8 @@ Spyder Editor
 This is a temporary script file.
 """
 
-from pandas import read_csv
 import matplotlib.pyplot as plt
-import os
 import numpy as np
-from pandas import DataFrame
-from pandas import Grouper
 data = np.load('/Users/ceciliacasolo/Desktop/Data_CC/tensor_daily_mean_5D.npy')
 
 #TIME SERIES PLOT OF VARIABLE COMPARED AMONG THE DIFFERENT STATIONS
