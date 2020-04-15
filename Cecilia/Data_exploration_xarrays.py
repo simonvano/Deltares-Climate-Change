@@ -12,13 +12,15 @@ import xarray as xr
 import dask.array as da
 from datetime import timedelta
 import matplotlib.pyplot as plt
+
+#We should unify the location and the name of our data, that would be the easiest way
+# to prevent pushing our own storage locations around. I propose one folder called Datares in the main directory
 data = np.load('/Users/ceciliacasolo/Desktop/Data_CC/tensor_daily_mean_5D.npy')
 c=xr.DataArray(data)
 darr = da.from_array(data, chunks=(33238,7,10,5,2))
 
-#dates= pd.date_range(start="2016-01-01",end="2096-12-31")
-dates= pd.date_range(start="2016-01-01",end="2107-01-01") #date is wrong but the dimentions did not add up
-variables=["rsds","tas","uas","vas","clt","hurs","ps"]
+
+dates= pd.date_range(start="2006-01-01",end="2096-12-31")
 experiments=['rcp45','rcp85']
 stations=['Marsdiep Noord','Doove Balg West',
                 'Vliestroom','Doove Balg Oost',
