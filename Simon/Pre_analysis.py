@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 Data = np.load('tensor_daily_mean_5D.npy')
 
+#=================DEFINE FUNCTIONS======================================
 def YearlyAverage(Data):
     st = 0
     AvDataLst = []
@@ -53,6 +54,9 @@ def DevideInSeasons(Data):
     Au = np.concatenate(Autumn,axis = 0)
     return [Wi,Sp,Su,Au]
 
+
+#===============SELECT THE RELEVANT STATION, MODEL, EXPERIMENT=============
+
     
 var= 1
 VARIABLES = ['Surface Downwelling Shortwave Radiation',
@@ -91,7 +95,8 @@ STATIONS = ['Marsdiep Noord','Doove Balg West',
 """
 
 mdl = 0
-MODELS = ['CNRM-CERFACS-CNRM-CM5','ICHEC-EC-EARTH', 'IPSL-IPSL-CM5A-MR','MOHC-HadGEM2-ES','MPI-M-MPI-ESM-LR']
+MODELS = ['CNRM-CERFACS-CNRM-CM5','ICHEC-EC-EARTH', 
+          'IPSL-IPSL-CM5A-MR','MOHC-HadGEM2-ES','MPI-M-MPI-ESM-LR']
 """
 0 'CNRM-CERFACS-CNRM-CM5'
 1 'ICHEC-EC-EARTH'
@@ -103,10 +108,17 @@ exp = 0
 EXPERIMENTS = ['rcp45','rcp85']
 
 
-YA = YearlyAverage(Data)
-[Wi,Sp,Su,Au] = DevideInSeasons(Data)
+#==============CREATE PLOTS FOR PRE-ANALYSIS OF THE DATA======================
+
+
+YA = YearlyAverage(Data)               #Array with yearly averages
+[Wi,Sp,Su,Au] = DevideInSeasons(Data)  #Arrays with selected seasons
+
+
 PLT = True
 if PLT == True:
+    
+    "Plot the evolution of the temperature according to some models"
     fig = plt.figure(1, figsize=(12,12))
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
@@ -123,13 +135,12 @@ if PLT == True:
     plt.grid(True)
     plt.title(EXPERIMENTS[1])
     fig.suptitle('Temperature evolution according to different models')
-    
     fig.savefig('DATA_EXPLORATION_temperature_evolution_models.png', bbox_inches='tight')
     
+    
+    "Boxplot parameters in 2006 and 2096"
     fig = plt.figure(2, figsize = (12,16))
     fig.suptitle('Evolution of paramater destribution')
-    
-    
     for i in range(7):
         ax = fig.add_subplot(4,2,i+1)
         plt.grid(True)
@@ -138,9 +149,9 @@ if PLT == True:
     fig.savefig('DATA_EXPLORATION_evolution_spread.png', bbox_inches='tight')
     
     
+    "Boxplot parameters in 2006 and 2096 per season"
     fig = plt.figure(3, figsize = (30,16))
     fig.suptitle('Evolution of paramater destribution per season',size = 'xx-large')
-
     LAB = ['Winter 2006','Winter 2096',
            'Spring 2006','Sprint 2096',
            'Summer 2006','Summer 2096',
@@ -157,10 +168,11 @@ if PLT == True:
     fig.savefig('DATA_EXPLORATION_evolution_season_spread.png', bbox_inches='tight')
     
     
+    
+    "Boxplot parameters per season"
     fig = plt.figure(4, figsize = (16,16))
     fig.suptitle('Paramater destribution per season',size = 'xx-large')
     LAB = ['Winter','Spring ','Summer','Autumn']
-    
     for i in range(7):
         ax = fig.add_subplot(4,2,i+1)
         DAT = [Wi[:,i,st,mdl,exp],Sp[:,i,st,mdl,exp],
@@ -171,23 +183,4 @@ if PLT == True:
     fig.savefig('DATA_EXPLORATION_season_spread.png', bbox_inches='tight')
 
 
-#for i in range(len(STATIONS)):
-#    SelectedData = Data[:,var,i,mdl,exp]
-#    print('Selected data')
-#    print(VARIABLES[var],' ', STATIONS[st],' ', MODELS[mdl],' ',EXPERIMENTS[exp])
-#
-#A = np.transpose(SelectedData)
-#data_to_plot = A.tolist()
-#
-## Create a figure instance
-#fig = plt.figure(1, figsize=(9, 6))
-#
-## Create an axes instance
-#ax = fig.add_subplot(111)
-#
-## Create the boxplot
-#bp = ax.boxplot(data_to_plot)
-#
-## Save the figure
-#fig.savefig('fig1.png', bbox_inches='tight')
-    
+
